@@ -1,6 +1,6 @@
 # Civic Pulse: California community health signals
 
-A static mockup for an AI-assisted public-health planning dashboard. It uses synthetic, aggregated community data to show how a team could explore geographic readiness signals related to COVID-19 and respiratory outbreaks.
+Tester message on github! A static mockup for an AI-assisted public-health planning dashboard. It uses synthetic, aggregated community data to show how a team could explore geographic readiness signals related to COVID-19 and respiratory outbreaks.
 
 ## Run
 
