@@ -1,0 +1,12 @@
+# Downloaded source data and failed API responses
+data/week4/raw/
+
+# Temporary or extracted boundary artifacts
+data/week4/tmp/
+data/week4/**/cb_2023_06_tract_500k.zip
+data/week4/**/cb_2023_06_tract_500k/
+*.tmp
+
+# Superseded acquisition script and validation output from the abandoned ACS plan
+scripts/acquire_week4_data.ps1
+data/week4/validation/geoid_join_report.json

@@ -1,95 +1,26 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Civic Pulse | California community health signals</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css" />
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Reported mammography use among women ages 50–74 across Santa Clara County census tracts.">
+  <title>Mammography Use in Santa Clara County</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,600&display=swap" rel="stylesheet">
+  <link href="https://unpkg.com/maplibre-gl@5.7.1/dist/maplibre-gl.css" rel="stylesheet"><link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div class="app-shell">
-    <aside class="sidebar">
-      <div class="brand-lockup">
-        <div class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></div>
-        <div><strong>CIVIC PULSE</strong><small>PUBLIC HEALTH STUDIO</small></div>
-      </div>
-      <div class="sidebar-rule"></div>
-      <nav class="main-nav" aria-label="Main navigation">
-        <a class="active" href="#overview"><span class="nav-icon">◈</span>Overview</a>
-        <a href="#communities"><span class="nav-icon">⌁</span>Communities</a>
-        <a href="#signals"><span class="nav-icon">◌</span>Signal library</a>
-      </nav>
-      <div class="sidebar-bottom">
-        <div class="status-chip"><span class="status-dot"></span><span>Model status</span><strong>Live preview</strong></div>
-        <p>Built for preparedness teams. Not a clinical diagnosis.</p>
-        <button class="sidebar-button" type="button" id="briefButton"><span>↗</span>Export briefing</button>
-      </div>
-    </aside>
-
-    <main class="main-content" id="overview">
-      <header class="topbar">
-        <div class="breadcrumb"><span>CALIFORNIA</span><i>/</i><strong>COMMUNITY HEALTH SIGNALS</strong></div>
-        <div class="top-actions"><span class="updated"><span class="pulse-dot"></span>Updated 08:42 PT</span><button class="icon-button" aria-label="Notifications" title="Notifications">♢<b></b></button><div class="avatar">RT</div></div>
-      </header>
-
-      <section class="intro-section">
-        <div>
-          <p class="eyebrow">AI-assisted readiness intelligence <span>●</span></p>
-          <h1>See where support<br><em>matters most.</em></h1>
-          <p class="intro-copy">A clearer view of the conditions that can make communities more susceptible to COVID-19 and other respiratory outbreaks, so teams can plan earlier and respond more fairly.</p>
-        </div>
-        <div class="date-control"><span>VIEWING WINDOW</span><button type="button" id="windowButton">Last 30 days <span>⌄</span></button></div>
-      </section>
-
-      <section class="metric-strip" aria-label="Statewide summary">
-        <div class="metric-card"><div class="metric-label">Communities monitored <span>ⓘ</span></div><strong>58</strong><small>all CA counties</small></div>
-        <div class="metric-card"><div class="metric-label">Elevated readiness need <span>ⓘ</span></div><strong class="coral-text">12</strong><small>communities flagged</small></div>
-        <div class="metric-card"><div class="metric-label">Signal confidence <span>ⓘ</span></div><strong>87<span class="unit">%</span></strong><small>based on data freshness</small></div>
-        <div class="metric-card model-card"><div class="metric-label">Current model <span class="model-live">● READY</span></div><strong>CA-Risk <span>v0.8</span></strong><small>human-reviewed · 06 Jun 2024</small></div>
-      </section>
-
-      <section class="workspace-grid">
-        <div class="map-panel panel" id="communities">
-          <div class="panel-heading"><div><p class="eyebrow">Geographic view</p><h2>Community readiness map</h2></div><div class="map-controls"><button class="small-icon" aria-label="Zoom out">−</button><button class="small-icon" aria-label="Zoom in">+</button><button class="small-icon" aria-label="Reset map">↺</button></div></div>
-          <div class="map-toolbar"><div class="segmented-control" role="group" aria-label="Map metric"><button class="selected" data-metric="readiness">Readiness need</button><button data-metric="access">Care access</button><button data-metric="signals">New signals</button></div><label class="search-wrap"><span>⌕</span><input id="searchInput" type="search" placeholder="Find a community" aria-label="Find a community"></label></div>
-          <div class="map-stage">
-            <div class="map-grid-lines"></div>
-            <svg class="california-map" viewBox="0 0 460 590" role="img" aria-label="Stylized map of California communities">
-              <path class="state-outline" d="M111 28 151 43 184 70 208 102 237 137 256 170 285 208 306 241 342 276 366 323 389 368 401 418 399 465 382 505 348 538 317 560 270 574 236 564 209 533 183 493 157 454 137 419 122 381 103 339 83 298 67 258 54 212 45 165 49 119 70 75Z"/>
-              <path class="county-line" d="M74 172 173 139 250 172 316 159 360 222M58 247 147 224 204 270 290 247 365 289M88 308 170 321 232 363 337 338M124 388 196 399 268 451 370 426M155 453 214 492 316 478"/>
-              <g id="mapPoints"></g>
-            </svg>
-            <div class="map-legend"><span><i class="legend-dot low"></i>Lower need</span><span><i class="legend-dot medium"></i>Watch</span><span><i class="legend-dot high"></i>Elevated</span></div>
-            <div class="map-note"><span>✦</span>AI signals are directional, not predictive of individual outcomes.</div>
-          </div>
-        </div>
-
-        <aside class="insight-panel panel" id="signals">
-          <div class="insight-top"><p class="eyebrow">Selected community</p><button class="more-button" aria-label="More options">•••</button></div>
-          <div class="community-title"><div class="county-badge" id="selectedInitials">CC</div><div><h2 id="selectedName">Coachella Valley</h2><p id="selectedRegion">Riverside County · Southern California</p></div></div>
-          <div class="score-row"><div class="score-ring" id="scoreRing"><div><strong id="selectedScore">78</strong><span>/ 100</span></div></div><div><p class="score-kicker">READINESS NEED</p><h3 id="selectedLevel">Elevated</h3><p class="score-detail" id="selectedDetail">Higher support need than 74% of monitored communities.</p></div></div>
-          <div class="insight-divider"></div>
-          <div class="factor-heading"><h3>What is shaping this signal?</h3><span>AI EXPLAINED</span></div>
-          <div class="factor-list" id="factorList"></div>
-          <button class="scenario-button" id="scenarioButton" type="button"><span>✦</span>Run a what-if scenario <b>→</b></button>
-          <p class="insight-footnote">Scores combine public, aggregated indicators. They do not label people or determine access to services.</p>
-        </aside>
-      </section>
-
-      <section class="bottom-grid">
-        <div class="ranking-panel panel">
-          <div class="panel-heading"><div><p class="eyebrow">Prioritization queue</p><h2>Communities to watch</h2></div><button class="text-button" id="viewAllButton">View all <span>→</span></button></div>
-          <div class="table-wrap"><table><thead><tr><th>Community</th><th>Readiness need</th><th>Top signal</th><th>Trend</th></tr></thead><tbody id="rankingBody"></tbody></table></div>
-        </div>
-        <div class="method-panel panel"><div class="method-icon">✦</div><p class="eyebrow">For care teams</p><h2>Human context<br>comes first.</h2><p>Healthcare workers can use these directional signals to prioritize outreach, coordinate testing and vaccination resources, and bring local knowledge into preparedness huddles before an outbreak accelerates.</p><a href="#signals">Explore signal library <span>→</span></a><a class="government-link" href="https://www.cdph.ca.gov/Programs/CID/DCDC/Pages/COVID-19.aspx" target="_blank" rel="noopener noreferrer">Visit California COVID-19 guidance <span>↗</span></a></div>
-      </section>
-      <footer><span>© 2024 Civic Pulse concept</span><span>Data shown is synthetic for demonstration</span><span>Privacy &amp; equity principles ↗</span></footer>
-    </main>
-  </div>
-  <div class="toast" id="toast" role="status"></div>
-  <script src="app.js"></script>
+  <header class="site-header"><a class="brand" href="#top"><span class="brand-mark" aria-hidden="true"></span><span>Santa Clara County<br><small>Community Health Data</small></span></a><nav aria-label="Page sections"><a href="#map-section">Map</a><a href="#distribution">Distribution</a><a href="#about">About</a></nav></header>
+  <main id="top">
+    <section class="hero"><div><p class="eyebrow">CDC PLACES · 2025 release</p><h1>Reported mammography use across Santa Clara County</h1><p class="lede">How does reported mammography use among women ages 50–74 vary across census tracts in Santa Clara County, California?</p></div><div class="hero-note"><strong>What is measured</strong><span>Modeled percentage reporting a mammogram within the previous two years</span></div></section>
+    <section class="summary-grid" aria-label="Data summary"><article><span>Census tracts</span><strong id="tract-count">—</strong><small>with reported estimates</small></article><article><span>County tract median</span><strong id="median-rate">—</strong><small>unweighted across tracts</small></article><article><span>Observed tract range</span><strong id="rate-range">—</strong><small>lowest to highest estimate</small></article></section>
+    <section class="map-section" id="map-section"><div class="section-heading"><div><p class="eyebrow">Geographic variation</p><h2>Mammography use by census tract</h2></div><p>Hover over or select a tract for its estimate and 95% confidence interval.</p></div><div class="map-card"><div id="map" aria-label="Interactive choropleth map of mammography use by Santa Clara County census tract"></div><div class="legend" id="map-legend"></div><aside class="tract-detail" id="tract-detail" aria-live="polite"><span>Selected tract</span><h3>Explore the map</h3><p>Hover or click a tract to view its data.</p></aside></div></section>
+    <section class="analysis-grid" id="distribution"><article class="chart-card"><div class="section-heading compact"><div><p class="eyebrow">All tracts</p><h2>Distribution of estimates</h2></div></div><div id="histogram" class="chart" aria-label="Histogram of tract mammography rates"></div></article><article class="chart-card"><div class="section-heading compact"><div><p class="eyebrow">Lowest estimates</p><h2>Ten lowest-rate tracts</h2></div></div><div id="lowest-chart" class="chart tall" aria-label="Horizontal bar chart of the ten tracts with lowest mammography rates"></div></article></section>
+    <section class="interpretation" id="interpretation"><div><p class="eyebrow">What the data show</p><h2>Interpretation</h2></div><p id="interpretation-copy">Calculating results from the tract data…</p></section>
+    <section class="about-grid" id="about"><article><p class="eyebrow">Measure</p><h2>Definition and timing</h2><p>The measure is the model-based crude prevalence of women ages 50–74 who reported having a mammogram within the previous two years. The PLACES 2025 release carries this measure forward from the 2022 Behavioral Risk Factor Surveillance System.</p></article><article><p class="eyebrow">Geography</p><h2>Coverage</h2><p>The analysis includes 408 census tracts in Santa Clara County. Tract geometry comes from the Census Bureau’s TIGERweb Generalized ACS 2023 Census Tracts 500K layer. Data and boundaries join on the 11-character tract GEOID.</p></article><article><p class="eyebrow">Limitations</p><h2>How to read the results</h2><p>PLACES values are modeled small-area estimates based partly on self-reported survey responses, not direct tract-level screening counts. Confidence intervals show uncertainty. Tract comparisons are descriptive, not individual behavior or causal effects.</p></article></section>
+    <section class="sources"><p class="eyebrow">Official sources</p><div><a href="https://chronicdata.cdc.gov/w/yjkw-uj5s/tdwk-ruhb" target="_blank" rel="noopener noreferrer">CDC PLACES tract data ↗</a><a href="https://www.cdc.gov/places/measure-definitions/prevention.html" target="_blank" rel="noopener noreferrer">CDC measure definition ↗</a><a href="https://tigerweb.geo.census.gov/arcgis/rest/services/Generalized_ACS2023/Tracts_Blocks/MapServer/4" target="_blank" rel="noopener noreferrer">Census TIGERweb tract layer ↗</a><a href="https://openfreemap.org/" target="_blank" rel="noopener noreferrer">OpenFreeMap / OpenStreetMap ↗</a></div></section>
+  </main>
+  <footer><span>Santa Clara County mammography dashboard</span><span>2023 census tracts · 2022 BRFSS measure / 2025 PLACES release</span></footer>
+  <div class="loading" id="loading" role="status">Loading tract data…</div>
+  <script src="https://unpkg.com/maplibre-gl@5.7.1/dist/maplibre-gl.js"></script><script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script><script src="app.js"></script>
 </body>
 </html>
